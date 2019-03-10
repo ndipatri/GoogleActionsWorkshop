@@ -11,6 +11,8 @@ const https = require('https');
 const querystring = require('querystring');
 
 const app = dialogflow({debug: true});
+
+// This will be the name of your function as it appears in the Firebase Console 
 exports.myCatapult = functions.https.onRequest(app);
 
 // The following are intents that help with basic conversational
@@ -32,9 +34,9 @@ app.intent('Default Welcome Intent', (conv) => {
 function initializeConversation(conv, name) {
     const sessionParticle = new Particle()
 
-    // Here we do any setup for this conversation (e.g. API login)
+    // Here we would do any setup for this conversation (e.g. API login)
 
     return new Promise((resolve, reject) => {
-        resolve(conv.ask(`Good day, ${name}. What can I do for you today?`));
+        resolve(conv.ask(`Hello ${name}! What can I do for you today?`));
     })
 }
