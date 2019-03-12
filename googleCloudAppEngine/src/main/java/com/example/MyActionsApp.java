@@ -38,14 +38,14 @@ public class MyActionsApp extends DialogflowApp {
   @ForIntent("Default Welcome Intent")
   public ActionResponse welcome(ActionRequest request) {
     LOGGER.info("Welcome intent start.");
+
     ResponseBuilder responseBuilder = getResponseBuilder(request);
-    ResourceBundle rb = ResourceBundle.getBundle("resources");
     User user = request.getUser();
 
     if (user != null && user.getLastSeen() != null) {
-      responseBuilder.add(rb.getString("welcome_back"));
+      responseBuilder.add("Welcome Back!");
     } else {
-      responseBuilder.add(rb.getString("welcome"));
+      responseBuilder.add("Welcome!");
     }
 
     LOGGER.info("Welcome intent end.");
