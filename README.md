@@ -4,7 +4,7 @@ Words have power! In this workshop, we’ll step outside of our Android comfort 
 
 Get ready to learn a taste of Kotlin-based Google Actions fulfillment with Google’s AppEngine, the Particle Photon Arduino platform and possibly Newton’s Laws of Motion as they pertain to Ping Pong balls! (BYOL - bring your own laptop)
  
-*** IMPORTANT PRE-REQUISITE FOR THIS WORKSHOP ***
+***IMPORTANT PRE-REQUISITE FOR THIS WORKSHOP***
 
 In order to use the AppEngine provided by the Google Cloud Platform (GCP) for this workshop, you will need to log in to the [Google Cloud Platform](https://console.cloud.google.com) using your Google account. In addition, ** you will need to create a billing account with Google using an active credit card ** (see NOTE below for more details on why you need to do this).  Once you are in the GCP console, click on the 'Billing' tab on the left hand side and follow instructions. You can still attend the workshop and listen in and enjoy but you won't be able to create a Google Action using GCP is you don't associate a credit card with your GCP account.
 
