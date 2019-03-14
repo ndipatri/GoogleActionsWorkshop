@@ -1,31 +1,17 @@
-/*
- * Copyright 2018 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example
 
 import com.google.actions.api.ActionRequest
 import com.google.actions.api.ActionResponse
 import com.google.actions.api.DialogflowApp
 import com.google.actions.api.ForIntent
-import com.google.actions.api.response.ResponseBuilder
-import com.google.api.services.actions_fulfillment.v2.model.User
-import java.util.ResourceBundle
-import java.util.stream.Collectors
-import org.slf4j.Logger
+import okhttp3.MediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import org.slf4j.LoggerFactory
+import java.util.logging.Level
+import java.util.logging.Logger
+
 
 /**
  * Implements all intent handlers for this Action. Note that your App must extend from DialogflowApp
@@ -41,13 +27,45 @@ class MyActionsApp : DialogflowApp() {
         val user = request.user
 
         if (user != null && user!!.getLastSeen() != null) {
-            responseBuilder.add("Hey there! Welcome Back!")
+            responseBuilder.add("Hey there! Good to see you again!")
         } else {
             responseBuilder.add("Hey there!")
         }
 
+        // this should obviously be more selective based on user input, but for
+        // now just see if it works.
+        actuateServo()
+
         LOGGER.info("Welcome intent end.")
         return responseBuilder.endConversation().build()
+    }
+
+    private fun actuateServo() {
+        var client = OkHttpClient()
+
+        Logger.getLogger(OkHttpClient::class.java.name).level = Level.FINE
+
+        // GCP has an Integration path for Particle, but we want to demonstrate the use of a
+        // vanilla webhook
+
+        // For our simple webhook, we don't need to send any arguments.
+        // Particle also requires functions to be called via POST
+        var emptyBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), "")
+
+        var request = Request.Builder()
+                .header("Authorization", "Bearer {access token goes here}")
+                .post(emptyBody)
+                .url("https://api.particle.io/v1/devices/{device id goes here}/actuate")
+
+                .build()
+
+        client.newCall(request).execute().also {
+
+            var respondBody = it.body()!!.source().readUtf8()
+
+            it.close()
+            LOGGER.info("Response: success=${it.isSuccessful}, and response was $respondBody")
+        }
     }
 
     companion object {
