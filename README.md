@@ -14,7 +14,7 @@ You will be using your own laptop for this workshop.  Although I will go through
 
 Do not click the 'Upgrade' link at the top of the GCP console.  This will ensure your credit card will never be charged. (and even then, it would only be charged if you used all your credit).
 
-Also, **be aware that you providing only Google your credit card on your laptop over HTTPS**, not anyone at the conference nor anyone associated with the conference.
+Also, **be aware that you are providing only Google your credit card on your laptop over HTTPS**, not anyone at the conference nor anyone associated with the conference. And, again, you can do this before attending the workshop.
 
 If all this has scared you away from creating a GCP account, that's ok :-) . You can still attend
 the workshop and listen in and enjoy but you won't be able to create a Google Action using GCP.
