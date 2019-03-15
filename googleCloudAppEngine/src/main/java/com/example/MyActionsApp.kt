@@ -24,6 +24,8 @@ class MyActionsApp : DialogflowApp() {
         LOGGER.info("Welcome intent start.")
 
         val responseBuilder = getResponseBuilder(request)
+
+        //
         val user = request.user
 
         if (user != null && user!!.getLastSeen() != null) {
@@ -32,12 +34,10 @@ class MyActionsApp : DialogflowApp() {
             responseBuilder.add("Hey there!")
         }
 
-        // this should obviously be more selective based on user input, but for
-        // now just see if it works.
-        actuateServo()
+        responseBuilder.addSuggestions(arrayOf("Yes", "No"))
 
         LOGGER.info("Welcome intent end.")
-        return responseBuilder.endConversation().build()
+        return responseBuilder.build()
     }
 
     private fun actuateServo() {
