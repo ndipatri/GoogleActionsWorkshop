@@ -2,6 +2,7 @@ package com.example
 
 import com.google.actions.api.*
 import com.google.actions.api.response.helperintent.Permission
+import com.google.api.services.actions_fulfillment.v2.model.SpeechResponse
 import org.slf4j.LoggerFactory
 
 
@@ -9,7 +10,6 @@ class MyActionsApp : DialogflowApp() {
 
     @ForIntent("Default Welcome Intent")
     fun welcome(request: ActionRequest): ActionResponse {
-        LOGGER.info("Welcome intent started.")
 
         return getResponseBuilder(request).apply {
             LOGGER.info("Welcome intent started.")
@@ -17,8 +17,12 @@ class MyActionsApp : DialogflowApp() {
             var userName = request.userStorage["userName"]
 
             if (userName != null) {
-                add("Arr! Good to see you again, $userName! Would you be loading your catapult now, sir?")
-                addSuggestions(arrayOf("Arr! Yes", "Arr! No"))
+                // Using Speech Synthesis Markup Language (SSML) for effect:
+
+                add("<speak><p><prosody rate=\"x-slow\" pitch=\"-3st\">Arg</prosody><break time=\"200ms\"/></p></speak>")
+
+                add(" Ahoy $userName! Would you be loading your catapult now, sir?")
+                addSuggestions(arrayOf("Yes", "No"))
             } else {
                 add("ignore this text") // this has to be here or there will be JSON error w/ Dialog Flow
                 add(Permission().apply {
@@ -45,10 +49,10 @@ class MyActionsApp : DialogflowApp() {
                 var userName = request.userStorage["userName"] as String
 
                 add("Much obliged $userName, Would you be loading your catapult now, sir?")
-                addSuggestions(arrayOf("Arr! Yes", "Arr! No"))
+                addSuggestions(arrayOf("Yes", "No"))
             } else {
                 add("I respect a Pirate's Privacy! Would you be loading your catapult now, sir?")
-                addSuggestions(arrayOf("Arr! Yes", "Arr! No"))
+                addSuggestions(arrayOf("Yes", "No"))
             }
         }.build().also {
             LOGGER.info("Permissions intent end.")
