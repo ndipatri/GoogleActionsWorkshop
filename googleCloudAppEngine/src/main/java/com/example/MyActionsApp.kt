@@ -14,7 +14,10 @@ class MyActionsApp : DialogflowApp() {
 
         val responseBuilder = getResponseBuilder(request)
 
-        //
+        // Notice use of built-in User object to help with building a
+        // customized experience.
+
+        // bla bla bla
         val user = request.user
 
         if (user != null && user!!.getLastSeen() != null) {
