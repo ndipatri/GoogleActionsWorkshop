@@ -18,14 +18,16 @@ class MyActionsApp : DialogflowApp() {
         val user = request.user
 
         if (user != null && user!!.getLastSeen() != null) {
-            responseBuilder.add("Hey there! Good to see you again!")
+            responseBuilder.add("Good to see you again!")
         } else {
             responseBuilder.add("Hey there!")
         }
-        responseBuilder.add("Ping Pong balls don't hurt even if they hit you on the head.")
+        responseBuilder.add("Would you like to load your catapult?")
+
+        responseBuilder.addSuggestions(arrayOf("Yes", "No"))
 
         LOGGER.info("Welcome intent end.")
-        return responseBuilder.endConversation().build()
+        return responseBuilder.build()
     }
 
     companion object {
