@@ -1,36 +1,58 @@
 package com.example
 
-import com.google.actions.api.ActionRequest
-import com.google.actions.api.ActionResponse
-import com.google.actions.api.DialogflowApp
-import com.google.actions.api.ForIntent
+import com.google.actions.api.*
+import com.google.actions.api.response.helperintent.Permission
 import org.slf4j.LoggerFactory
+
 
 class MyActionsApp : DialogflowApp() {
 
     @ForIntent("Default Welcome Intent")
     fun welcome(request: ActionRequest): ActionResponse {
-        LOGGER.info("Welcome intent start.")
+        LOGGER.info("Welcome intent started.")
 
-        val responseBuilder = getResponseBuilder(request)
+        return getResponseBuilder(request).apply {
+            LOGGER.info("Welcome intent started.")
 
-        // Notice use of built-in User object to help with building a
-        // customized experience.
+            var userName = request.userStorage["userName"]
 
-        // bla bla bla
-        val user = request.user
-
-        if (user != null && user!!.getLastSeen() != null) {
-            responseBuilder.add("Good to see you again!")
-        } else {
-            responseBuilder.add("Hey there!")
+            if (userName != null) {
+                add("Arr! Good to see you again, $userName! Would you be loading your catapult now, sir?")
+                addSuggestions(arrayOf("Arr! Yes", "Arr! No"))
+            } else {
+                add("ignore this text") // this has to be here or there will be JSON error w/ Dialog Flow
+                add(Permission().apply {
+                    setPermissions(arrayOf(PERMISSION_NAME))
+                    setContext("Beggin yer pardon, sir! So I don't have to call you sir anymore")
+                })
+            }
+        }.build().also {
+            LOGGER.info("Welcome intent ended.")
         }
-        responseBuilder.add("Would you like to load your catapult?")
+    }
 
-        responseBuilder.addSuggestions(arrayOf("Yes", "No"))
+    @ForIntent("actions_intent_PERMISSION")
+    fun permissions(request: ActionRequest): ActionResponse {
+        LOGGER.info("Permission intent started.")
 
-        LOGGER.info("Welcome intent end.")
-        return responseBuilder.build()
+        return getResponseBuilder(request).apply {
+            if (request.isPermissionGranted()) {
+
+                (request.userStorage as MutableMap).apply {
+                    set("userName", "Pirate ${request.user!!.profile.givenName}")
+                }
+
+                var userName = request.userStorage["userName"] as String
+
+                add("Much obliged $userName, Would you be loading your catapult now, sir?")
+                addSuggestions(arrayOf("Arr! Yes", "Arr! No"))
+            } else {
+                add("I respect a Pirate's Privacy! Would you be loading your catapult now, sir?")
+                addSuggestions(arrayOf("Arr! Yes", "Arr! No"))
+            }
+        }.build().also {
+            LOGGER.info("Permissions intent end.")
+        }
     }
 
     companion object {
