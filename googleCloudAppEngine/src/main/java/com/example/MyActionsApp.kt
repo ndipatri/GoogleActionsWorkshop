@@ -61,7 +61,7 @@ class MyActionsApp : DialogflowApp() {
                     " launching your catapult now, sir?")
                 addSuggestions(arrayOf("Load", "Launch"))
             } else {
-                add("I respect a Pirate's Privacy! Would you be loading " +
+                add("I respect a Pirate's privacy! Would you be loading " +
                     "or launching your catapult now, sir?")
                 addSuggestions(arrayOf("Load", "Launch"))
             }
@@ -76,9 +76,29 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            add("Command requested is ${request.getParameter("command")}.")
+            when (request.getParameter("command")) {
+                "Load", "Loading" -> {
+                    add("<speak>" +
+                        "Got it! Prepare to load the catapult! Put a Ping Pong ball " +
+                        "in the basket, pull the launch arm all the way back, " +
+                        "and hold until the latch closes." +
+                        "</speak>")
 
-            // TODO fill this out for both Load and Launch cases (include catapult instructions)
+                    actuateServo()
+                }
+
+                "Launch", "Launching" -> {
+                    add("<speak>" +
+                        "Ok, launching catapult!  Stand back!" +
+                        "</speak>")
+
+                    actuateServo()
+                }
+
+                else -> {
+                    add("Sorry, I didn't get that")
+                }
+            }
 
         }.build().also {
             LOGGER.info("Welcome follow-up intent ended.")
@@ -98,9 +118,9 @@ class MyActionsApp : DialogflowApp() {
         var emptyBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), "")
 
         var request = Request.Builder()
-                .header("Authorization", "Bearer {access token goes here}")
+                .header("Authorization", "Bearer c038e134b7fd9ce81b3ed41944983106d49b8e12")
                 .post(emptyBody)
-                .url("https://api.particle.io/v1/devices/{device id goes here}/actuate")
+                .url("https://api.particle.io/v1/devices/e00fce6801eb8f6eb0c23d32/actuate")
 
                 .build()
 
