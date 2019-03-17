@@ -2,6 +2,7 @@ package com.example
 
 import com.google.actions.api.*
 import com.google.actions.api.response.helperintent.Permission
+import com.google.api.services.actions_fulfillment.v2.model.SimpleResponse
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -80,19 +81,17 @@ class MyActionsApp : DialogflowApp() {
                 "Load", "Loading" -> {
                     add("<speak>" +
                         "Got it! Prepare to load the catapult! Put a Ping Pong ball " +
-                        "in the basket, pull the launch arm all the way back, " +
-                        "and hold until the latch closes." +
+                        "in the basket and get ready to pull the launch arm all " +
+                        "the way back.  When you are read say 'Go'!" +
                         "</speak>")
-
-                    actuateServo()
+                    addSuggestions(arrayOf("Go"))
                 }
 
                 "Launch", "Launching" -> {
                     add("<speak>" +
-                        "Ok, launching catapult!  Stand back!" +
+                        "Ok, aim the catapult and when you're ready say 'Go!" +
                         "</speak>")
-
-                    actuateServo()
+                    addSuggestions(arrayOf("Go"))
                 }
 
                 else -> {
@@ -102,6 +101,21 @@ class MyActionsApp : DialogflowApp() {
 
         }.build().also {
             LOGGER.info("Welcome follow-up intent ended.")
+        }
+    }
+
+    @ForIntent("Default Welcome Intent - custom - custom")
+    fun welcomeFollowUpFollowUp(request: ActionRequest): ActionResponse {
+        LOGGER.info("Welcome follow-up follow-up intent started.")
+
+        return getResponseBuilder(request).apply {
+
+           add("Done!")
+
+            actuateServo()
+
+        }.build().also {
+            LOGGER.info("Welcome follow-up follow-up intent ended.")
         }
     }
 
