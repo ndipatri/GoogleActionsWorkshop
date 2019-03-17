@@ -2,7 +2,6 @@ package com.example
 
 import com.google.actions.api.*
 import com.google.actions.api.response.helperintent.Permission
-import com.google.api.services.actions_fulfillment.v2.model.SimpleResponse
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -28,9 +27,7 @@ class MyActionsApp : DialogflowApp() {
                 add("<speak><p><prosody rate=\"x-slow\" pitch=\"-3st\">Arg</prosody>" +
                     "<break time=\"200ms\"/></p></speak>")
 
-                add("Ahoy $userName! Would you be loading or launching your " +
-                    "catapult now, sir?")
-                addSuggestions(arrayOf("Load", "Launch"))
+                add("Ahoy $userName! Let me know when you are ready!")
             } else {
                 add("ignore this text") // this has to be here or there will be
                                         // JSON error w/ Dialog Flow
@@ -58,64 +55,69 @@ class MyActionsApp : DialogflowApp() {
 
                 var userName = request.userStorage["userName"] as String
 
-                add("Much obliged $userName, Would you be loading or " +
-                    " launching your catapult now, sir?")
-                addSuggestions(arrayOf("Load", "Launch"))
+                add("Much obliged $userName, Let me know when you " +
+                    "are ready!")
+
             } else {
-                add("I respect a Pirate's privacy! Would you be loading " +
-                    "or launching your catapult now, sir?")
-                addSuggestions(arrayOf("Load", "Launch"))
+                add("I respect a Pirate's privacy! Let me know when " +
+                    "you are ready!")
+
             }
         }.build().also {
             LOGGER.info("Permissions intent end.")
         }
     }
 
-    @ForIntent("Default Welcome Intent - custom")
-    fun welcomeFollowUp(request: ActionRequest): ActionResponse {
-        LOGGER.info("Welcome follow-up intent started.")
+    @ForIntent("Start Catapult")
+    fun startCatapult(request: ActionRequest): ActionResponse {
+        LOGGER.info("'Start Catapult' intent started.")
 
         return getResponseBuilder(request).apply {
 
-            when (request.getParameter("command")) {
-                "Load", "Loading" -> {
-                    add("<speak>" +
-                        "Got it! Prepare to load the catapult! Put a Ping Pong ball " +
-                        "in the basket and get ready to pull the launch arm all " +
-                        "the way back.  When you are read say 'Go'!" +
-                        "</speak>")
-                    addSuggestions(arrayOf("Go"))
-                }
-
-                "Launch", "Launching" -> {
-                    add("<speak>" +
-                        "Ok, aim the catapult and when you're ready say 'Go!" +
-                        "</speak>")
-                    addSuggestions(arrayOf("Go"))
-                }
-
-                else -> {
-                    add("Sorry, I didn't get that")
-                }
-            }
+            add("<speak>" +
+                    "Got it! Prepare to load the catapult! Put a Ping Pong ball " +
+                    "in the basket and get ready to pull the launch arm all " +
+                    "the way back.  When you are ready say 'Load'!" +
+                "</speak>")
 
         }.build().also {
-            LOGGER.info("Welcome follow-up intent ended.")
+            LOGGER.info("'Start Catapult' intent ended.")
         }
     }
 
-    @ForIntent("Default Welcome Intent - custom - custom")
-    fun welcomeFollowUpFollowUp(request: ActionRequest): ActionResponse {
-        LOGGER.info("Welcome follow-up follow-up intent started.")
+    @ForIntent("Load Catapult Follow-Up")
+    fun loadCatapult(request: ActionRequest): ActionResponse {
+        LOGGER.info("'Load Catapult Follow-Up' intent started.")
 
         return getResponseBuilder(request).apply {
 
-           add("Done!")
+            //actuateServo()
 
-            actuateServo()
+            add("<speak>" +
+                    "Catapult is loaded! Aim the catapult and when " +
+                    "you're ready say 'Fire!' to launch the " +
+                    "ping pong ball!" +
+                "</speak>")
 
         }.build().also {
-            LOGGER.info("Welcome follow-up follow-up intent ended.")
+            LOGGER.info("'Load Catapult Follow-Up' intent ended.")
+        }
+    }
+
+    @ForIntent("Launch Catapult Follow-Up")
+    fun launchCatapult(request: ActionRequest): ActionResponse {
+        LOGGER.info("'Launch Catapult Follow-Up' intent started.")
+
+        return getResponseBuilder(request).apply {
+
+            //actuateServo()
+
+            add("<speak>" +
+                    "Great shot! Ready to start again or do you want to quit?" +
+                    "</speak>")
+
+        }.build().also {
+            LOGGER.info("'Launch Catapult Follow-Up' intent ended.")
         }
     }
 
