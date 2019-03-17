@@ -1,7 +1,9 @@
 package com.example
 
-import com.google.actions.api.*
-import com.google.actions.api.response.helperintent.Permission
+import com.google.actions.api.ActionRequest
+import com.google.actions.api.ActionResponse
+import com.google.actions.api.DialogflowApp
+import com.google.actions.api.ForIntent
 import org.slf4j.LoggerFactory
 
 class MyActionsApp : DialogflowApp() {
