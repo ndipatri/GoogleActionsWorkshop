@@ -49,10 +49,12 @@ class MyActionsApp : DialogflowApp() {
 
                 var userName = request.userStorage["userName"] as String
 
-                add("Much obliged $userName!")
+                add("Much obliged $userName, Let me know when you " +
+                    "are ready!")
 
             } else {
-                add("I respect a Pirate's privacy! ")
+                add("I respect a Pirate's privacy! Let me know when " +
+                    "you are ready!")
 
             }
         }.build().also {
