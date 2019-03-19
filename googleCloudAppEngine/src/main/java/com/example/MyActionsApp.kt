@@ -62,6 +62,23 @@ class MyActionsApp : DialogflowApp() {
         }
     }
 
+    @ForIntent("Start Catapult")
+    fun startCatapult(request: ActionRequest): ActionResponse {
+        LOGGER.info("'Start Catapult' intent started.")
+
+        return getResponseBuilder(request).apply {
+
+            add("<speak>" +
+                    "Got it! Prepare to load the catapult! Put a Ping Pong ball " +
+                    "in the basket and get ready to pull the launch arm all " +
+                    "the way back.  When you are ready say 'Load'!" +
+                    "</speak>")
+
+        }.build().also {
+            LOGGER.info("'Start Catapult' intent ended.")
+        }
+    }
+
     companion object {
         private val LOGGER = LoggerFactory.getLogger(MyActionsApp::class.java!!)
     }
