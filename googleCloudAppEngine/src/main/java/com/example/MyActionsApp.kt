@@ -68,6 +68,26 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
+            add("<speak>" +
+                    "Put a Ping Pong ball in the basket, pull the arm back, " +
+                    "and say 'Load!" +
+                    "</speak>")
+
+        }.build().also {
+            LOGGER.info("'Start Catapult' intent ended.")
+        }
+    }
+
+
+
+
+
+    @ForIntent("Start Catapult")
+    fun stasdfrtCatapult(request: ActionRequest): ActionResponse {
+        LOGGER.info("'Start Catapult' intent started.")
+
+        return getResponseBuilder(request).apply {
+
             add(StringBuilder().apply {
                 append("<speak>")
                 append(
