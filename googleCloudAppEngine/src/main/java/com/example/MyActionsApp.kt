@@ -69,10 +69,9 @@ class MyActionsApp : DialogflowApp() {
         return getResponseBuilder(request).apply {
 
             add("<speak>" +
-                    "Got it! Prepare to load the catapult! Put a Ping Pong ball " +
-                    "in the basket and get ready to pull the launch arm all " +
-                    "the way back.  When you are ready say 'Load'!" +
-                    "</speak>")
+                    "Put a Ping Pong ball in the basket, pull the arm back, " +
+                    "and say 'Load!" +
+                "</speak>")
 
         }.build().also {
             LOGGER.info("'Start Catapult' intent ended.")
