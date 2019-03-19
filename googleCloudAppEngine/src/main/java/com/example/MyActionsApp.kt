@@ -68,7 +68,7 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            StringBuilder().apply {
+            add(StringBuilder().apply {
                 append("<speak>")
                 append(
                     if (request.getParameter("confusion").toString().isNotEmpty()) {
@@ -80,9 +80,10 @@ class MyActionsApp : DialogflowApp() {
                 )
 
                 append("Put a Ping Pong ball in the basket and get ready to pull the " +
-                       "launch arm all the way back. Let me know when you are ready!")
-                "</speak>")
-            }
+                        "launch arm all the way back. When you are ready say 'Load'!")
+
+                append("</speak>")
+            }.toString())
 
         }.build().also {
             LOGGER.info("'Start Catapult' intent ended.")
