@@ -97,6 +97,7 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
+            // NOT IMPLEMENTED YET
             //actuateServo()
 
             add("<speak>" +
