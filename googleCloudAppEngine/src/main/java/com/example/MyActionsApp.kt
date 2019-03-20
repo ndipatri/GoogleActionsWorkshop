@@ -68,10 +68,23 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            add("<speak>" +
-                    "Put a Ping Pong ball in the basket, pull the arm back, " +
-                    "and say 'Load!" +
-                    "</speak>")
+            add(StringBuilder().apply {
+                append("<speak>")
+
+                LOGGER.info("parameter is ${request.getParameter("confusion")}")
+
+                if (request.getParameter("confusion").toString().isNotEmpty()) {
+                    append("Sorry, I'm going a bit too fast it seems!  We're going to " +
+                            "launch a ping pong ball using a popsicle stick and rubber " +
+                            "band catapult. Go get the ping pong ball and the " +
+                            "catapult. Put the ball in the basket and get ready to pull " +
+                            "the launch arm all the way back. ")
+                }
+
+                append("When you are ready say 'Load'!")
+
+                append("</speak>")
+            }.toString())
 
         }.build().also {
             LOGGER.info("'Start Catapult' intent ended.")
