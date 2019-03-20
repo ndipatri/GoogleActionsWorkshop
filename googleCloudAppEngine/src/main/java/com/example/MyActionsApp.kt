@@ -111,6 +111,23 @@ class MyActionsApp : DialogflowApp() {
         }
     }
 
+    @ForIntent("Launch Catapult Follow-Up")
+    fun launchCatapult(request: ActionRequest): ActionResponse {
+        LOGGER.info("'Launch Catapult Follow-Up' intent started.")
+
+        return getResponseBuilder(request).apply {
+
+            // NOT IMPLEMENTED YET
+            //actuateServo()
+
+            add("<speak>" +
+                    "Great shot! Ready to start again or do you want to quit?" +
+                    "</speak>")
+
+        }.build().also {
+            LOGGER.info("'Launch Catapult Follow-Up' intent ended.")
+        }
+    }
 
     companion object {
         private val LOGGER = LoggerFactory.getLogger(MyActionsApp::class.java!!)
