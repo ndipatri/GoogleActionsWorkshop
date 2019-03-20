@@ -137,17 +137,20 @@ class MyActionsApp : DialogflowApp() {
 
         Logger.getLogger(OkHttpClient::class.java.name).level = Level.FINE
 
-        // GCP has an Integration path for Particle, but we want to demonstrate the use of a
-        // vanilla webhook
+        // GCP has an Integration path for Particle, but we want to
+        // demonstrate the use of a vanilla webhook
 
         // For our simple webhook, we don't need to send any arguments.
         // Particle also requires functions to be called via POST
-        var emptyBody = RequestBody.create(MediaType.get("application/json; charset=utf-8"), "")
+        var emptyBody =
+                RequestBody.create(MediaType.get("application/json; charset=utf-8"),
+                                         "")
 
         var request = Request.Builder()
-                .header("Authorization", "Bearer c038e134b7fd9ce81b3ed41944983106d49b8e12")
+                .header("Authorization",
+                        "Bearer {ACCESS_TOKEN}")
                 .post(emptyBody)
-                .url("https://api.particle.io/v1/devices/e00fce6801eb8f6eb0c23d32/actuate")
+                .url("https://api.particle.io/v1/devices/{DEVICE_ID}/actuate")
 
                 .build()
 
@@ -156,7 +159,8 @@ class MyActionsApp : DialogflowApp() {
             var respondBody = it.body()!!.source().readUtf8()
 
             it.close()
-            LOGGER.info("Response: success=${it.isSuccessful}, and response was $respondBody")
+            LOGGER.info("Response: success=${it.isSuccessful}, " +
+                        "and response was $respondBody")
         }
     }
 
