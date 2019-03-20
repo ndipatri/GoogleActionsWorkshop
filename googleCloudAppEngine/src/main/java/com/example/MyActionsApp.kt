@@ -92,6 +92,23 @@ class MyActionsApp : DialogflowApp() {
     }
 
     @ForIntent("Load Catapult Follow-Up")
+    fun loadCatapult(request: ActionRequest): ActionResponse {
+        LOGGER.info("'Load Catapult Follow-Up' intent started.")
+
+        return getResponseBuilder(request).apply {
+
+            //actuateServo()
+
+            add("<speak>" +
+                    "Catapult is loaded! Aim the catapult and when " +
+                    "you're ready say 'Fire!' to launch the " +
+                    "ping pong ball!" +
+                    "</speak>")
+
+        }.build().also {
+            LOGGER.info("'Load Catapult Follow-Up' intent ended.")
+        }
+    }
 
 
     companion object {
