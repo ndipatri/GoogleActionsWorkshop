@@ -124,8 +124,8 @@ class MyActionsApp : DialogflowApp() {
             actuateServo()
 
             add("<speak>" +
-                    "Great shot! Ready to start again or do you want to quit?" +
-                    "</speak>")
+                    "Great shot! Ready to start again or do you want to say goodbye?" +
+                "</speak>")
 
         }.build().also {
             LOGGER.info("'Launch Catapult Follow-Up' intent ended.")
