@@ -19,7 +19,7 @@ The 'googleCloudAppEngine' directory is where we will be conducting this worksho
 For details instructions on this workshop start [here](https://docs.google.com/document/d/1uZ1BeA0qE42ctzZScs6CCyCK07HCGJ-ryMR8wqROkI0/edit?usp=sharing)
 
  
-***IMPORTANT PRE-REQUISITE FOR THIS WORKSHOP***
+###IMPORTANT PRE-REQUISITE FOR THIS WORKSHOP
 
 During the workshop you will using the Google Cloud Platform. You will need to log in to
 the Google Cloud Platform (https://console.cloud.google.com) using your Google account.
@@ -27,7 +27,7 @@ the Google Cloud Platform (https://console.cloud.google.com) using your Google a
 See **NOTE** below on why you might want to also create a Billing account with Google.
 
 
-***DEVELOPMENT PLATFORM SETUP***
+###DEVELOPMENT PLATFORM SETUP
 
 We'll be going over all of this during the workshop, but in the interest of saving the meager WiFi 
 bandwidth that will be available, please feel free to install (or at least download) the following on 
@@ -48,7 +48,7 @@ your device ahead of time. The commands shown below are for the Mac:
 
 * __Gradle__ - build system
 
-```./brew install gradle```
+```>brew install gradle```
 
 * __curl__ - command line web request tool
 
@@ -66,7 +66,7 @@ Android Studio as Google Actions are not based on Android.
      [Download](https://www.jetbrains.com/idea/download/download-thanks.html?platform=mac)
 
 
-***PARTS LIST***
+###PARTS LIST
 
 
 [Micro Servo](https://www.amazon.com/gp/product/B072V529YD/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&psc=1)
@@ -91,7 +91,7 @@ Android Studio as Google Actions are not based on Android.
 
 
 
-***NOTE ON CREATING BILLING ACCOUNT:*** 
+###NOTE ON CREATING BILLING ACCOUNT
 
 Near the end of this workshop, you will be using your voice to control some fun Ping Pong-related
 toys.  Your custom Google Action will be making an output HTTP call to a webhook.  Most cloud platforms
