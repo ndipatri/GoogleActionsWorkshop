@@ -1,6 +1,6 @@
 # GoogleActionsWorkshop
 
-##Node.js and Firebase Functions
+***Node.js and Firebase Functions***
 
 This is a very simple example of how Google Actions have typically been implemented: 
 Node.js running in the cloud as a Firebase Function.  
