@@ -90,6 +90,9 @@ build any of these components after you leave the workshop, here is a parts list
 
 [PLA 3D printer filament](https://www.amazon.com/gp/product/B07H9BFNS5/ref=ppx_yo_dt_b_asin_title_o09_s01?ie=UTF8&psc=1)
 
+Here are [details instructions](https://slides.com/ndipatri/deck-15/fullscreen?token=nDQ96Z1a) on how to actually build one of these catapults. Please keep in
+mind these instructions were originaly created for 10 year olds :-)  You will need a hot glue gun!
+
 
 
 ### NOTE ON CREATING BILLING ACCOUNT
