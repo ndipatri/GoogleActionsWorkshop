@@ -19,15 +19,12 @@ The 'googleCloudAppEngine' directory is where we will be conducting this worksho
 For details instructions on this workshop start [here](https://docs.google.com/document/d/1uZ1BeA0qE42ctzZScs6CCyCK07HCGJ-ryMR8wqROkI0/edit?usp=sharing)
 
  
-### IMPORTANT PRE-REQUISITE FOR THIS WORKSHOP
+### Things you can do before you come to the workshop 
 
 During the workshop you will using the Google Cloud Platform. You will need to log in to
 the Google Cloud Platform (https://console.cloud.google.com) using your Google account.
 
 See **NOTE** below on why you might want to also create a Billing account with Google.
-
-
-### DEVELOPMENT PLATFORM SETUP
 
 We'll be going over all of this during the workshop, but in the interest of saving the meager WiFi 
 bandwidth that will be available, please feel free to install (or at least download) the following on 
@@ -64,6 +61,7 @@ your device ahead of time. The commands shown below are for the Mac:
 Android Studio as Google Actions are not based on Android.
 
      [Download](https://www.jetbrains.com/idea/download/download-thanks.html?platform=mac)
+
 
 
 ### PARTS LIST
