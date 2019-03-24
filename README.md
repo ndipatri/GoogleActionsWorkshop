@@ -1,20 +1,23 @@
 # GoogleActionsWorkshop
 
-Words have power! In this workshop, we’ll step outside of our Android comfort zone and create a conversational user experience using the Google Assistant running on our phones. We’ll manipulate the world around us with Internet of Things (IoT) hardware.  
+Words have power! In this workshop, we’ll step outside of our Android comfort zone and create 
+a conversational user experience using the Google Assistant running on our phones. 
 
-Get ready to learn a taste of Kotlin-based Google Actions fulfillment with Google’s AppEngine, the Particle Photon Arduino platform and possibly Newton’s Laws of Motion as they pertain to Ping Pong balls! (BYOL - bring your own laptop)
+We’ll manipulate the world around us with Internet of Things (IoT) hardware.  
+
+Get ready to learn a taste of Kotlin-based Google Actions fulfillment with Google’s AppEngine, 
+the Particle Photon Arduino platform and possibly Newton’s Laws of Motion as they pertain 
+to Ping Pong balls! (BYOL - bring your own laptop)
+
+
 
  
 ***IMPORTANT PRE-REQUISITE FOR THIS WORKSHOP***
 
 During the workshop you will using the Google Cloud Platform. You will need to log in to
 the Google Cloud Platform (https://console.cloud.google.com) using your Google account.
-In addition, you will need to create a billing account using an active credit card.
- 
-See **NOTE** below for more details on why you will need to do this.
 
-Once you are in the GCP console, click on the **Billing** tab on the left hand side and 
-follow instructions. You can do this step before the workshop or during.
+See **NOTE** below on why you might want to also create a Billing account with Google.
 
 
 ***DEVELOPMENT PLATFORM SETUP***
@@ -50,16 +53,52 @@ your device ahead of time. The commands shown below are for the Mac:
      
      [Installation Instructions](https://cloud.google.com/sdk/?hl=en_US&_ga=2.132115275.-514248634.1552053382&_gac=1.118830587.1552132197.Cj0KCQiA5Y3kBRDwARIsAEwloL5wCXwsyqONoluPWbThHNH8Vyo2w5ga_Y7ngqJpLhNajtnjTNNn8XIaAs16EALw_wcB)
      
-* __IntelliJ__ - Java build environment.  This will serve our needs better than Android Studio.
+* __IntelliJ__ - Java (and therefore Kotlin) build environment.  This will serve our needs better than 
+Android Studio as Google Actions are not based on Android.
 
      [Download](https://www.jetbrains.com/idea/download/download-thanks.html?platform=mac)
+
+
+***PARTS LIST***
+
+
+[Micro Servo](https://www.amazon.com/gp/product/B072V529YD/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&psc=1)
+
+[Particle Photon IoT Dev Kit](https://store.particle.io/collections/photon)
+
+[Breadboard Jumper Wires](https://www.amazon.com/Solderless-Flexible-Breadboard-Jumper-100pcs/dp/B005TZJ0AM/ref=sr_1_6?crid=2WX9X7QGL90SR&keywords=breadboard+jumper+wires&qid=1552495713&s=gateway&sprefix=breadboard+ju%2Caps%2C123&sr=8-6)
+
+[Hot Glue Sticks](https://www.amazon.com/gp/product/B07FBDPWPV/ref=ox_sc_act_title_1?smid=ATVPDKIKX0DER&psc=1)
+
+[⅜” x 12” wooden dowels](https://www.amazon.com/gp/product/B01BG8A8K6/ref=ppx_yo_dt_b_asin_title_o07_s01?ie=UTF8&psc=1)
+
+[Popsycle Sticks](https://www.amazon.com/gp/product/B009EE38UM/ref=ppx_yo_dt_b_asin_title_o08_s00?ie=UTF8&psc=1)
+
+[Rubber Bands](https://www.amazon.com/gp/product/B0787YYKLJ/ref=ppx_yo_dt_b_asin_title_o08_s01?ie=UTF8&psc=1)
+
+[Ping Pong Balls](https://www.amazon.com/gp/product/B06XWNPM3H/ref=ppx_yo_dt_b_asin_title_o08_s01?ie=UTF8&psc=1)
+
+[3” Zip Ties](https://www.amazon.com/400-Piece-Contractor-Multi-Purpose-Organizing/dp/B077TJ11JR/ref=lp_17347419011_1_3?srs=17347419011&ie=UTF8&qid=1552503529&sr=8-3&th=1)
+
+[PLA 3D printer filament](https://www.amazon.com/gp/product/B07H9BFNS5/ref=ppx_yo_dt_b_asin_title_o09_s01?ie=UTF8&psc=1)
 
 
 
 ***NOTE ON CREATING BILLING ACCOUNT:*** 
 
+Near the end of this workshop, you will be using your voice to control some fun Ping Pong-related
+toys.  Your custom Google Action will be making an output HTTP call to a webhook.  Most cloud platforms
+require some form of verification before they let you do this.  Google uses your credit card.  So if you 
+really want to have fun with your new Google Actions you're going to need to create a Google billing account.
+
 You will be using your own laptop for this workshop.  Although I will go through the process of
 creating the billing account for GCP during the workshop, you can also do this ahead of time. 
+
+Start by logging in to the [Google Cloud Platform (GCP) console](https://console.cloud.google.com).
+
+Once you are in the GCP console, click on the **Billing** tab on the left hand side and 
+follow instructions.
+
 The reason Google asks you to provide your credit card is because they give all GCP accounts
 a $300 credit and they don't want people making multiple Google accounts to accumulate this
 credit.  For our workshop, you will not be using any of this credit nor will you be 
@@ -69,9 +108,11 @@ Do not click the 'Upgrade' link at the top of the GCP console.  This will ensure
 card will never be charged. (and even then, it would only be charged if you used all your credit).
 
 Also, **be aware that you are providing only Google your credit card on your laptop over HTTPS**, 
-not to anyone at the conference nor anyone associated with the conference. And, again, you can 
+not to anyone at the conference nor to anyone associated with the conference. And, again, you can 
 do this before attending the workshop.
 
 If all this has scared you away from creating a GCP account, that's ok :-) You can still attend
-the workshop and listen in and enjoy but you won't be able to create a Google Action using GCP
-and therefore will not be able to launch a Ping Pong Catapult :-(
+the workshop and get through 90% of the content.  You just won't be able to shoot Ping Pong balls
+with your voice :-(
+
+
