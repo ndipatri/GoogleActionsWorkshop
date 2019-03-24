@@ -66,6 +66,9 @@ Android Studio as Google Actions are not based on Android.
 
 ### PARTS LIST
 
+All necessary hardware (except for your laptop) will be provided at the workshop, but in case you want to 
+build any of these components after you leave the workshop, here is a parts list with Amazon purchase links:
+
 
 [Micro Servo](https://www.amazon.com/gp/product/B072V529YD/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&psc=1)
 
