@@ -9,7 +9,14 @@ Get ready to learn a taste of Kotlin-based Google Actions fulfillment with Googl
 the Particle Photon Arduino platform and possibly Newton’s Laws of Motion as they pertain 
 to Ping Pong balls! (BYOL - bring your own laptop)
 
+This GitHub project has two main directories: firebaseFunctions and googleCloudAppEngine
 
+The 'firebaseFunctions' directory has a basic code sample of how Google Actions used to be done: Node.js running in the
+cloud as a Firebase Function.
+
+The 'googleCloudAppEngine' directory is where we will be conducting this workshop.
+
+For details instructions on this workshop start [here](https://docs.google.com/document/d/1uZ1BeA0qE42ctzZScs6CCyCK07HCGJ-ryMR8wqROkI0/edit?usp=sharing)
 
  
 ***IMPORTANT PRE-REQUISITE FOR THIS WORKSHOP***
