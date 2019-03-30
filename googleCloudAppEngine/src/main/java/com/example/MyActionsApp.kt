@@ -45,7 +45,7 @@ class MyActionsApp : DialogflowApp() {
         }
     }
 
-    @ForIntent("actions_intent_PERMISSION")
+    @ForIntent("Permission Intent")
     fun permissions(request: ActionRequest): ActionResponse {
         LOGGER.info("Permission intent started.")
 
