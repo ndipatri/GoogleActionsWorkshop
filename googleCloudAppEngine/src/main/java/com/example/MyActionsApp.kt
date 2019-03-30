@@ -81,7 +81,7 @@ class MyActionsApp : DialogflowApp() {
                             "the launch arm all the way back. ")
                 }
 
-                append("When you are ready say 'Load'!")
+                append("Want to load the catapult?")
 
                 append("</speak>")
             }.toString())
