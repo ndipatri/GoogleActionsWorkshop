@@ -15,6 +15,10 @@ class MyActionsApp : DialogflowApp() {
     @ForIntent("Default Welcome Intent")
     fun welcome(request: ActionRequest): ActionResponse {
 
+//        (request.userStorage as MutableMap).apply {
+//            clear()
+//        }
+
         return getResponseBuilder(request).apply {
             LOGGER.info("Welcome intent started.")
 
@@ -86,7 +90,7 @@ class MyActionsApp : DialogflowApp() {
                             "the launch arm all the way back. ")
                 }
 
-                append("When you are ready say 'Load'!")
+                append("Want to Load the catapult?")
 
                 append("</speak>")
             }.toString())
@@ -105,10 +109,9 @@ class MyActionsApp : DialogflowApp() {
             actuateServo()
 
             add("<speak>" +
-                    "Catapult is loaded! Aim the catapult and when " +
-                    "you're ready say 'Fire!' to launch the " +
-                    "ping pong ball!" +
-                    "</speak>")
+                    "Catapult is loaded! Set your target and let " +
+                    "me know when to launch the pint pong ball!" +
+                "</speak>")
 
         }.build().also {
             LOGGER.info("'Load Catapult Follow-Up' intent ended.")
