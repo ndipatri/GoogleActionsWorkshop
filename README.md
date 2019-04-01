@@ -9,15 +9,26 @@ Get ready to learn a taste of Kotlin-based Google Actions fulfillment with Googl
 the Particle Photon Arduino platform and possibly Newton’s Laws of Motion as they pertain 
 to Ping Pong balls! (BYOL - bring your own laptop)
 
+This GitHub project has two main directories: firebaseFunctions and googleCloudAppEngine
+
+The 'firebaseFunctions' directory has a basic code sample of how Google Actions used to be done: Node.js running in the
+cloud as a Firebase Function.
+
+The 'googleCloudAppEngine' directory is where we will be conducting this workshop.
+
+For details instructions on this workshop start [here](https://docs.google.com/document/d/1uZ1BeA0qE42ctzZScs6CCyCK07HCGJ-ryMR8wqROkI0/edit?usp=sharing)
+
  
 ### Things you can do before you come to the workshop 
 
 During the workshop you will using the Google Cloud Platform. You will need to log in to
 the Google Cloud Platform (https://console.cloud.google.com) using your Google account.
 
+See **NOTE** below on why you might want to also create a Billing account with Google.
+
 We'll be going over all of this during the workshop, but in the interest of saving the meager WiFi 
-bandwidth that will be available, please feel free to install (or at least download) the following 
-on your device ahead of time. The commands shown below are for the Mac:
+bandwidth that will be available, please feel free to install (or at least download) the following on 
+your device ahead of time. The commands shown below are for the Mac:
 
 
 * __HomeBrew__ - OSX build environment
@@ -69,7 +80,7 @@ build any of these components after you leave the workshop, here is a parts list
 
 [⅜” x 12” wooden dowels](https://www.amazon.com/gp/product/B01BG8A8K6/ref=ppx_yo_dt_b_asin_title_o07_s01?ie=UTF8&psc=1)
 
-[Popsicle Sticks](https://www.amazon.com/gp/product/B009EE38UM/ref=ppx_yo_dt_b_asin_title_o08_s00?ie=UTF8&psc=1)
+[Popsycle Sticks](https://www.amazon.com/gp/product/B009EE38UM/ref=ppx_yo_dt_b_asin_title_o08_s00?ie=UTF8&psc=1)
 
 [Rubber Bands](https://www.amazon.com/gp/product/B0787YYKLJ/ref=ppx_yo_dt_b_asin_title_o08_s01?ie=UTF8&psc=1)
 
@@ -79,12 +90,10 @@ build any of these components after you leave the workshop, here is a parts list
 
 [PLA 3D printer filament](https://www.amazon.com/gp/product/B07H9BFNS5/ref=ppx_yo_dt_b_asin_title_o09_s01?ie=UTF8&psc=1)
 
-Here are [details instructions](https://slides.com/ndipatri/deck-15/fullscreen?token=nDQ96Z1a) on how to actually build one of these catapults. Please keep in
-mind these instructions were originally created for 10 year olds :-)  You will need a hot glue gun!
-
 
 
 ### NOTE ON CREATING BILLING ACCOUNT
+
 
 Near the end of this workshop, you will be using your voice to control some fun Ping Pong-related
 toys.  Your custom Google Action will be making an output HTTP call to a webhook.  Most cloud platforms
@@ -112,6 +121,8 @@ not to anyone at the conference nor to anyone associated with the conference. An
 do this before attending the workshop.
 
 If all this has scared you away from creating a GCP account, that's ok :-) You can still attend
-the workshop and get through 95% of the content.  You just won't be able to shoot Ping Pong balls
+the workshop and get through 90% of the content.  You just won't be able to shoot Ping Pong balls
 with your voice :-(
+
+
 
