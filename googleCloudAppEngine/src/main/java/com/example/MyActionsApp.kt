@@ -23,7 +23,7 @@ class MyActionsApp : DialogflowApp() {
             } else {
                 add("Hey there!")
             }
-            add("Ping Pong balls don't hurt even if they hit you on the head.")
+            add("Let me know when you are ready!")
 
             endConversation()
 
