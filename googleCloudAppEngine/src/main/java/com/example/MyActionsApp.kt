@@ -72,6 +72,8 @@ class MyActionsApp : DialogflowApp() {
                 append("<speak>")
 
                 if (request.getParameter("confusion").toString().isNotEmpty()) {
+
+                    // 4 noobs
                     append("Sorry, I'm going a bit too fast it seems!  We're going to " +
                             "launch a ping pong ball using a popsicle stick and rubber " +
                             "band catapult. Go get the ping pong ball and the " +
