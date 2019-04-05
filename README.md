@@ -37,7 +37,7 @@ your device ahead of time. The commands shown below are for the Mac:
 
 * __HomeBrew__ - OSX build environment
 
-```>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)```
+```>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```
 
 * __XCode__ - OSX build tools
 
