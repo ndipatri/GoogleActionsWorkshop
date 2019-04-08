@@ -72,7 +72,7 @@ class MyActionsApp : DialogflowApp() {
     }
 
     @ForIntent("Ready Catapult")
-    fun startCatapult(request: ActionRequest): ActionResponse {
+    fun readyCatapult(request: ActionRequest): ActionResponse {
         LOGGER.info("'Ready Catapult' intent started.")
 
         return getResponseBuilder(request).apply {
