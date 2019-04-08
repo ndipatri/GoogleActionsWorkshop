@@ -21,6 +21,9 @@ For details instructions on this workshop start [here](https://docs.google.com/d
  
 ### Things you can do before you come to the workshop 
 
+**Make sure your laptop has either a built-in USB-A connector or a
+USB-C to USB-A dongle.**
+
 During the workshop you will using the Google Cloud Platform. You will need to log in to
 the Google Cloud Platform (https://console.cloud.google.com) using your Google account.
 
@@ -30,10 +33,11 @@ We'll be going over all of this during the workshop, but in the interest of savi
 bandwidth that will be available, please feel free to install (or at least download) the following on 
 your device ahead of time. The commands shown below are for the Mac:
 
+* __GitHub__ - You will need a GitHub.com account.
 
 * __HomeBrew__ - OSX build environment
 
-```>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)```
+```>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```
 
 * __XCode__ - OSX build tools
 
@@ -53,14 +57,17 @@ your device ahead of time. The commands shown below are for the Mac:
 
 * __Google Cloud Platform CLI__ - command line tools needed for pushing to AppEngine
 
-     [Download](https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-238.0.0-darwin-x86_64.tar.gz)
+     Download
+     [https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-238.0.0-darwin-x86_64.tar.gz](https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-238.0.0-darwin-x86_64.tar.gz)
+     
      
      [Installation Instructions](https://cloud.google.com/sdk/?hl=en_US&_ga=2.132115275.-514248634.1552053382&_gac=1.118830587.1552132197.Cj0KCQiA5Y3kBRDwARIsAEwloL5wCXwsyqONoluPWbThHNH8Vyo2w5ga_Y7ngqJpLhNajtnjTNNn8XIaAs16EALw_wcB)
      
 * __IntelliJ__ - Java (and therefore Kotlin) build environment.  This will serve our needs better than 
 Android Studio as Google Actions are not based on Android.
 
-     [Download](https://www.jetbrains.com/idea/download/download-thanks.html?platform=mac)
+     Download
+     [https://www.jetbrains.com/idea/download/download-thanks.html?platform=mac](https://www.jetbrains.com/idea/download/download-thanks.html?platform=mac)
 
 
 
