@@ -110,7 +110,7 @@ class MyActionsApp : DialogflowApp() {
 
             add("<speak>" +
                     "Catapult is loaded! Set your target and let " +
-                    "me know when to launch the pint pong ball!" +
+                    "me know when to launch the ping pong ball!" +
                 "</speak>")
 
         }.build().also {
