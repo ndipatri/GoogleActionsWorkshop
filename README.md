@@ -16,9 +16,6 @@ cloud as a Firebase Function.
 
 The 'googleCloudAppEngine' directory is where we will be conducting this workshop.
 
-For details instructions on this workshop start [here](https://docs.google.com/document/d/1uZ1BeA0qE42ctzZScs6CCyCK07HCGJ-ryMR8wqROkI0/edit?usp=sharing)
-
- 
 ### Things you can do before you come to the workshop 
 
 **Make sure your laptop has either a built-in USB-A connector or a
