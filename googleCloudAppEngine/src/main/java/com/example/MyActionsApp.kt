@@ -151,9 +151,9 @@ class MyActionsApp : DialogflowApp() {
 
         var request = Request.Builder()
                 .header("Authorization",
-                        "Bearer e0da891cd4c54b52b11add372c8bea78058e3c03")
+                        "Bearer 5e0fe78b89d98b35b0109cd16502fbdfcb224a64")
                 .post(emptyBody)
-                .url("https://api.particle.io/v1/devices/{DEVICE_ID}/actuate")
+                .url("https://api.particle.io/v1/devices/480028001051363036373538/actuate")
 
                 .build()
 
