@@ -106,7 +106,7 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            actuateServo()
+            //actuateServo()
 
             add("<speak>" +
                     "Catapult is loaded! Set your target and let " +
@@ -124,7 +124,7 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            actuateServo()
+            //actuateServo()
 
             add("<speak>" +
                     "Great shot! Ready to start again or do you want to say goodbye?" +
@@ -151,9 +151,9 @@ class MyActionsApp : DialogflowApp() {
 
         var request = Request.Builder()
                 .header("Authorization",
-                        "Bearer e0da891cd4c54b52b11add372c8bea78058e3c03")
+                        "Bearer a91bf4302799dd3e328c6dc5eb6d759a60c2e76a")
                 .post(emptyBody)
-                .url("https://api.particle.io/v1/devices/{DEVICE_ID}/actuate")
+                .url("https://api.particle.io/v1/devices/e00fce6801eb8f6eb0c23d32/actuate")
 
                 .build()
 
