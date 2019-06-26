@@ -1,5 +1,16 @@
 Servo myservo;
 
+// Output PINS
+int LED = D7;
+int MOTOR_IN1 = D5;
+int MOTOR_IN2 = D6;
+int SERVO = D2;
+
+// Input PINS
+int MOTOR_LIMIT_SWITCH=D4;
+int STATE_SWITCH=D3;
+
+// State
 int READY = 1;
 int LOADING = 2;
 int LOADED = 3;
@@ -8,82 +19,12 @@ int catapultState = READY;
 
 int previousState = -1;
 
-int LED = D7;
-int MOTOR_IN1 = D5;
-int MOTOR_IN2 = D6;
-int SERVO = D2;
-
-int MOTOR_LIMIT_SWITCH=D4;
-int STATE_SWITCH=D3;
-
-void singleFlash() {
-    digitalWrite(LED, HIGH);   // flash the LED (as an indicator)
-    delay(500);
-    digitalWrite(LED, LOW);   // flash the LED (as an indicator)
-}
-void doubleFlash() {
-    singleFlash();
-    delay(500);
-    singleFlash();
-}
-void unlockServo() {
-    myservo.write(90);  
-}
-void lockServo() {
-    myservo.write(180); 
-}
-void motorForward() {
-    digitalWrite(MOTOR_IN1, HIGH);
-    digitalWrite(MOTOR_IN2, LOW);
-}
-void motorReverse() {
-    digitalWrite(MOTOR_IN1, LOW);
-    digitalWrite(MOTOR_IN2, HIGH);
-}
-void motorStop() {
-    digitalWrite(MOTOR_IN1, LOW);
-    digitalWrite(MOTOR_IN2, LOW);   
-}
-
-int load(String command) {      
-        
-    if (catapultState == READY) {
-        catapultState = LOADING;
-        singleFlash();
-        
-        unlockServo();
-    
-        // Begin by spinning the MOTOR so we pull
-        // down the firing arm
-        motorForward();
-    
-        // The MOTOR_LIMIIT_SWITCH will eventually
-        // cause this to stop (we hope)
-    } else {
-        doubleFlash();
-    }
-        
-    return 1;                 
-}
-
-int fire(String command) {   
-    
-    if (catapultState == LOADED) {  
-        singleFlash();
-        
-        unlockServo();
-        
-        delay(1000);
-        
-        lockServo();
-        
-        catapultState = READY;
-    } else {
-        doubleFlash();
-    }
-    
-    return 1;                 // return a status of "1", success
-}
+// This instructs the core to not connect to the
+// Particle cloud until explicitly instructed to
+// do so...
+SYSTEM_MODE(MANUAL);
+bool first = true;
+bool shouldConnectToParticleCloud = true;
 
 void setup() {
     Particle.function("load", load);  // create a function called "load" 
@@ -106,8 +47,17 @@ void setup() {
 void loop() {
     
     int currentState = digitalRead(STATE_SWITCH); 
+
+    if (first && (currentState == LOW)) {
+        shouldConnectToParticleCloud = false;
+        first = false;
+    }
+
+    if (shouldConnectToParticleCloud) {
+        checkParticleCloudState();
+    }
+
     if (currentState != previousState) {
-        
         previousState = currentState;
         
         if (currentState == LOW) {
@@ -148,6 +98,92 @@ void loop() {
     delay(100);
 }
 
+void singleFlash() {
+    digitalWrite(LED, HIGH);   // flash the LED (as an indicator)
+    delay(500);
+    digitalWrite(LED, LOW);   // flash the LED (as an indicator)
+}
+void doubleFlash() {
+    singleFlash();
+    delay(500);
+    singleFlash();
+}
+void unlockServo() {
+    myservo.write(90);  
+}
+void lockServo() {
+    myservo.write(180); 
+}
+void motorForward() {
+    digitalWrite(MOTOR_IN1, HIGH);
+    digitalWrite(MOTOR_IN2, LOW);
+}
+void motorReverse() {
+    digitalWrite(MOTOR_IN1, LOW);
+    digitalWrite(MOTOR_IN2, HIGH);
+}
+void motorStop() {
+    digitalWrite(MOTOR_IN1, LOW);
+    digitalWrite(MOTOR_IN2, LOW);   
+}
 
+int load(String command) {      
+    if (catapultState == READY) {
+        catapultState = LOADING;
+        singleFlash();
+        
+        unlockServo();
+    
+        // Begin by spinning the MOTOR so we pull
+        // down the firing arm
+        motorForward();
+    
+        // The MOTOR_LIMIIT_SWITCH will eventually
+        // cause this to stop (we hope)
+    } else {
+        doubleFlash();
+    }
+        
+    return 1;                 
+}
 
+int fire(String command) {   
+    
+    if (catapultState == LOADED) {  
+        singleFlash();
+        
+        unlockServo();
+        
+        delay(1000);
+        
+        lockServo();
+        
+        catapultState = READY;
+    } else {
+        doubleFlash();
+    }
+    
+    return 1;                 // return a status of "1", success
+}
 
+// @return false if program loop should exit
+void checkParticleCloudState() {
+    if (!WiFi.hasCredentials()) {
+        delay(200);
+        return;
+    } else if (WiFi.connecting()) {
+        delay(200);
+        return;
+    }
+
+    if (!Particle.connected()) {
+
+        // notice here we block all operation of the button
+        // until we get a connection to Particle cloud...
+        Particle.connect(); // blocking call
+        delay(200);
+    }
+
+    // check-in with the Particle cloud 
+    Particle.process();
+}
