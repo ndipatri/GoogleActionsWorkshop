@@ -1,10 +1,12 @@
-Servo myservo;
+Servo fireServo;
+Servo loadServo;
 
 // Output PINS
 int LED = D7;
 int MOTOR_IN1 = D5;
 int MOTOR_IN2 = D6;
-int SERVO = D2;
+int FIRE_SERVO = D2;
+int LOAD_SERVO = D1;
 
 // Input PINS
 int MOTOR_LIMIT_SWITCH=D4;
@@ -32,7 +34,9 @@ void setup() {
                                       // connect it to the load function
     Particle.function("fire", fire); 
                                       
-    myservo.attach(SERVO);   // attach the servo on the D2 pin to the servo object
+    fireServo.attach(FIRE_SERVO);  
+    loadServo.attach(LOAD_SERVO); 
+
     pinMode(LED, OUTPUT);    // set D7 as an output so we can flash the onboard LED
     
     pinMode(MOTOR_IN1, OUTPUT);  // Pin 2 on L293d HBridge motor controller
@@ -40,18 +44,15 @@ void setup() {
     
     pinMode(MOTOR_LIMIT_SWITCH, INPUT_PULLUP); // internally tied to Vcc
     pinMode(STATE_SWITCH, INPUT_PULLUP); // internally tied to Vcc
-    
-    //motorStop();
 }
 
 void loop() {
-    
     int currentState = digitalRead(STATE_SWITCH); 
 
     if (first && (currentState == LOW)) {
         shouldConnectToParticleCloud = false;
-        first = false;
     }
+    first = false;
 
     if (shouldConnectToParticleCloud) {
         checkParticleCloudState();
@@ -75,15 +76,16 @@ void loop() {
 
     int limitSwitch = digitalRead(MOTOR_LIMIT_SWITCH); 
     if (catapultState == LOADING && limitSwitch == LOW) {
+
+        // firing arm is all the way down.
+
         catapultState = LOADED;
         
         digitalWrite(LED, HIGH);   
-
-        // firing arm is all the way down.
         
         // hold in place and lock
         motorStop();
-        lockServo();
+        closeFireServo();
         
         delay(3000);
         
@@ -91,11 +93,18 @@ void loop() {
         motorReverse();
         delay(3000);
         motorStop();
-        
+
+        grabAnotherPingPongBall();
+
+        // Wait for it to settle 
+        delay(3000);
+
+        dropPingPongBallIntoEggCup();
+
         digitalWrite(LED, LOW);   
     }
     
-    delay(100);
+    delay(50);
 }
 
 void singleFlash() {
@@ -108,11 +117,17 @@ void doubleFlash() {
     delay(500);
     singleFlash();
 }
-void unlockServo() {
-    myservo.write(90);  
+void dropPingPongBallIntoEggCup() {
+    loadServo.write(100);  
 }
-void lockServo() {
-    myservo.write(180); 
+void grabAnotherPingPongBall() {
+    loadServo.write(0); 
+}
+void openFireServo() {
+    fireServo.write(90);  
+}
+void closeFireServo() {
+    fireServo.write(180); 
 }
 void motorForward() {
     digitalWrite(MOTOR_IN1, HIGH);
@@ -132,7 +147,7 @@ int load(String command) {
         catapultState = LOADING;
         singleFlash();
         
-        unlockServo();
+        openFireServo();
     
         // Begin by spinning the MOTOR so we pull
         // down the firing arm
@@ -152,11 +167,11 @@ int fire(String command) {
     if (catapultState == LOADED) {  
         singleFlash();
         
-        unlockServo();
+        openFireServo();
         
         delay(1000);
         
-        lockServo();
+        closeFireServo();
         
         catapultState = READY;
     } else {
