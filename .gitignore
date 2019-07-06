@@ -5,3 +5,5 @@ googleCloudAppEngine/.gradle/4.10.1/taskHistory/taskHistory.lock
 googleCloudAppEngine/.gradle/buildOutputCleanup/buildOutputCleanup.lock
 googleCloudAppEngine/.gradle/buildOutputCleanup/cache.properties
 googleCloudAppEngine/.gradle/vcs-1/gc.properties
+particle/particleWorkbenchProject/.vscode/.cortex-debug.peripherals.state.json
+particle/particleWorkbenchProject/.vscode/.cortex-debug.registers.state.json
