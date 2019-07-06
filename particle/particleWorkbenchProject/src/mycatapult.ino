@@ -15,7 +15,8 @@ int STATE_SWITCH=D3;
 // State
 int READY = 1;
 int LOADING = 2;
-int LOADED = 3;
+int UNWINDING = 3;
+int LOADED = 4;
 
 int catapultState = READY;
 
@@ -57,10 +58,9 @@ void setup() {
 
 void loop() {
 
-    if (catapultState == LOADING && checkIfWeHaveUnwoundEnoughString()) {
+    if (catapultState == UNWINDING && checkIfWeHaveUnwoundEnoughString()) {
         // firing arm is all the way down and string is unwound.
         log("state = LOADED");
-
         catapultState = LOADED;
     }
 
@@ -68,6 +68,7 @@ void loop() {
 
     if (first && (currentState == LOW)) {
         shouldConnectToParticleCloud = false;
+        log("DISCONNECTED MODE");
     }
     first = false;
 
@@ -80,11 +81,13 @@ void loop() {
         
         if (currentState == LOW) {
             if (catapultState == READY) {
+                log("LOCAL MODE SELECT: LOAD");
                 load("");
                 return;
             }        
         
             if (catapultState == LOADED) {
+                log("LOCAL MODE SELECT: FIRE");
                 fire("");
                 return;
             }
@@ -95,24 +98,26 @@ void loop() {
     if (catapultState == LOADING && limitSwitch == LOW) {
         
         // hold in place and note how long we spun...
-        log("limit reached..  stopping motor");
-
         unsigned long spinTimeMillis = motorStop();
+        log("limit reached..  stopping motor. spinTime was %lu", spinTimeMillis);
 
         closeFireServo();
         
-        delay(3000);
+        delay(1000);
         
         grabAnotherPingPongBall();
 
         // wait for ball to settle
-        delay(3000);
+        delay(1000);
 
         dropPingPongBallIntoEggCup();
 
         // now that arm is locked, we can unwind string (this is so silly)
         // Note we don't leave 'LOADING' state here. we need to wait
         // for string to unwind ...
+
+        log("state = UNWINDING");
+        catapultState = UNWINDING;
         unwindString(spinTimeMillis);
 
         digitalWrite(LED, LOW);   
@@ -152,7 +157,6 @@ void windUpString() {
 void unwindString(unsigned long spinTimeMillis) {
     targetSpinStopTimeMillis = millis() + spinTimeMillis;    
     log("current time is %lu", millis());
-    log("spinTime  is %lu", spinTimeMillis);
     log("unwinding string.. setting targetSpinStopTimeMillis to %lu", targetSpinStopTimeMillis);
 
     digitalWrite(MOTOR_IN1, LOW);
@@ -160,12 +164,7 @@ void unwindString(unsigned long spinTimeMillis) {
 }
 boolean checkIfWeHaveUnwoundEnoughString() {
     if (targetSpinStopTimeMillis > 0) {
-        log("checking if unwound enough...targetSpinStopTimeMills=%lu", targetSpinStopTimeMillis);
-
         if (millis() > targetSpinStopTimeMillis) {
-            log("current time is %lu", millis());
-            log("elapsed unwind time is %lu", millis() - targetSpinStopTimeMillis);
-
             log("stop time expired.  Done unwinding.");
 
             // stop time expired
@@ -188,6 +187,8 @@ unsigned long motorStop() {
 int load(String command) {      
     if (catapultState == READY) {
         catapultState = LOADING;
+        log("state = LOADING");
+
         singleFlash();
         
         openFireServo();
@@ -219,6 +220,8 @@ int fire(String command) {
         closeFireServo();
         
         catapultState = READY;
+        log("state = READY");
+
     } else {
         doubleFlash();
     }
