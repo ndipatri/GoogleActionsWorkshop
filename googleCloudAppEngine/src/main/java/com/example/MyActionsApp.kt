@@ -106,7 +106,11 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            actuateServo()
+            executeParticleCloudFunction("load")
+
+            // Particle cloud calls are not blocking.  We need to wait until
+            // the load process finishes here.
+            Thread.sleep(3000)
 
             add("<speak>" +
                     "Catapult is loaded! Set your target and let " +
@@ -124,7 +128,7 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            actuateServo()
+            executeParticleCloudFunction("fire")
 
             add("<speak>" +
                     "Great shot! Ready to start again or do you want to say goodbye?" +
@@ -135,7 +139,7 @@ class MyActionsApp : DialogflowApp() {
         }
     }
 
-    private fun actuateServo() {
+    private fun executeParticleCloudFunction(functionName: String) {
         var client = OkHttpClient()
 
         Logger.getLogger(OkHttpClient::class.java.name).level = Level.FINE
@@ -151,9 +155,9 @@ class MyActionsApp : DialogflowApp() {
 
         var request = Request.Builder()
                 .header("Authorization",
-                        "Bearer 5e0fe78b89d98b35b0109cd16502fbdfcb224a64")
+                        "Bearer ffb8595d62a1c1e929fd962d940ebcb506d269f3")
                 .post(emptyBody)
-                .url("https://api.particle.io/v1/devices/480028001051363036373538/actuate")
+                .url("https://api.particle.io/v1/devices/330022000b47343432313031/$functionName")
 
                 .build()
 
