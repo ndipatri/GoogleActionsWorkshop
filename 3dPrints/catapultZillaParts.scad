@@ -164,13 +164,13 @@ module ballHopperBaseDriveSide() {
     }     
  
      // servo leg
-    translate([42, 0, -82]) {
-        cylinder(h=80, r=5);
+    translate([42, 0, -122]) {
+        cylinder(h=120, r=5);
     }  
   
     // bottom
-    translate([3.5, -20, -82]) {
-        cube([45.5, 40, 2]);
+    translate([3.5, -30, -122]) {
+        cube([45.5, 60, 4]);
     }      
 }
     
@@ -198,53 +198,53 @@ module ballHopperBaseNonDriveSide() {
     }  
   
     // non-drive leg
-    translate([-35, -6, -82]) {
-        cylinder(h=80, r=5);
+    translate([-35, -6, -122]) {
+        cylinder(h=120, r=5);
     }   
   
     // bottom
-    translate([-42, -20, -82]) {
-        cube([45.5, 40, 2]);
+    translate([-42, -30, -122]) {
+        cube([45.5, 60, 4]);
     }      
 }
 
 module ballHopperFeeder() {
-    
     // paper-towel tube receiver
     difference() {
-        cylinder(h=30, r=20.5);
-        cylinder(h=30, r=19);
-    } 
-    difference() {
-        cylinder(h=30, r=24);           
-        cylinder(h=30, r=22.5);
-    }   
-    
-    // drive-side receiver bracket
-    //
-    translate([18.5, 0, 5]) {
-        rotate([0,90,0]) {
-            cylinder(h=41, r=4);
+        translate([-3, 0, 0]) {
+            difference() {
+                cylinder(h=30, r=26);  
+       
+                // stop for cardboard  cutout
+                cylinder(h=35, r=22);
+                
+                // upper cutout for cardboard tube
+                translate([0, 0, 10]) {
+                    cylinder(h=35, r=22.5);
+                }
+            }  
+        } 
+        // cutout for drive-side leg
+        translate([16.5, 0, 5]) {
+            rotate([0,90,0]) {
+                cylinder(h=41, r=4.5);
+            }
         }
-    }
-    translate([55, 0, -31]) {
-        cylinder(h=35, r=4);
-    }
-    
-    // non-drive side receiver bracket
-    // left
+    } 
+
+    // non-drive side left leg
     translate([-39, -16, 5]) {
         rotate([0,90,0]) {
-            cylinder(h=25.5, r=4);
+            cylinder(h=16, r=4);
         }
     }
     translate([-35, -16, -31]) {
         cylinder(h=35, r=4);
     } 
-    // right
+    // non-drive side right leg
     translate([-39, 4, 5]) {
         rotate([0,90,0]) {
-            cylinder(h=20.5, r=4);
+            cylinder(h=12, r=4);
         }
     }
     translate([-35, 4, -31]) {
@@ -252,6 +252,19 @@ module ballHopperFeeder() {
     }  
 }
 
+module ballHopperFeederDriveSideReceiverBracket() {
+
+    // drive-side receiver bracket
+    //
+    translate([20, 0, 5]) {
+        rotate([0,90,0]) {
+            cylinder(h=39, r=4);
+        }
+    }
+    translate([55, 0, -31]) {
+        cylinder(h=35, r=4);
+    }    
+}
 
 
 color("Yellow") {
@@ -259,13 +272,14 @@ color("Yellow") {
         //mountForLimitSwitch();
     
         translate([2, -6, 6]) {
-            ballHopperSphere();
+            //ballHopperSphere();
         }
         ballHopperBaseDriveSide();
         ballHopperBaseNonDriveSide();
         
         translate([0, 0, 48]) {
             ballHopperFeeder();
+            ballHopperFeederDriveSideReceiverBracket();
         }
 
 }
