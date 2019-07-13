@@ -29,8 +29,8 @@ module stringSpool() {
            
             // string hole
             rotate([90,0,0]) {
-                translate([0, -10, -8]) {
-                    cylinder(h=20, r=1.5);
+                translate([0, -15, -8]) {
+                    cylinder(h=20, r=2.5);
                 }  
             }
         }
@@ -446,12 +446,12 @@ module rearBase() {
         }     
         
         // zip-tie via 2      
-        translate([65, 50, -3]) {
-            cylinder(h=10, r=2);
+        translate([73, 30, -3]) {
+            cylinder(h=10, r=3);
         }     
         // zip-tie via 2       
-        translate([73, 50, -3]) {
-            cylinder(h=10, r=2);
+        translate([73, 20, -3]) {
+            cylinder(h=10, r=3);
         }     
     }        
 }
@@ -462,36 +462,36 @@ module frontBase() {
             // left rail guide outer
             translate([-2, 10, -3]) {
                 rotate([90, 0, 0]) {
-                    cylinder(h=10, r=8);
+                    cylinder(h=10, r=10);
                 }
             }
             // right rail guide outer
-            translate([98, 10, -3]) {
+            translate([85, 10, -3]) {
                 rotate([90, 0, 0]) {
-                    cylinder(h=10, r=8);
+                    cylinder(h=10, r=10);
                 }
             }   
             // base
-            cube([100, 10, 5]);  
+            cube([90, 10, 5]);  
         }
         // right rail guide inner
         translate([-2, 10, -3]) {
             rotate([90, 0, 0]) {
-                cylinder(h=11, r=5.5);
+                cylinder(h=11, r=7.5);
             }          
         } 
         // right rail guide inner        
-        translate([98, 10, -3]) {
+        translate([85, 10, -3]) {
             rotate([90, 0, 0]) {
-                cylinder(h=11, r=5.5);
+                cylinder(h=11, r=7.5);
             }          
         } 
         // left rail guide bottom-cut       
-        translate([-10, -13, -20]) {
+        translate([-12, -13, -20]) {
             cube([20, 100, 20]);  
         }  
         // right rail guide bottom-cut       
-        translate([90, -13, -20]) {
+        translate([75, -13, -20]) {
             cube([20, 100, 20]);  
         }          
     }
@@ -503,7 +503,6 @@ color("Yellow") {
                 //stringSpool();
             }
         }
-    
 
         translate([74, 127, 112]) {
             rotate([0, 0, 180]) {
@@ -532,7 +531,6 @@ color("Yellow") {
         }
         
         
-        
         translate([1, -7, -8]) {
             motorBracketBottom();
         }
@@ -540,7 +538,7 @@ color("Yellow") {
             mountForLimitSwitch();
         }        
         translate([-5, -40, -23]) {
-            rearBase();
+           rearBase();
         }
         
         translate([-5, -65, -23]) {
