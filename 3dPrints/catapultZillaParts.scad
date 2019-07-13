@@ -456,106 +456,47 @@ module rearBase() {
     }        
 }
 
-module hopperBase() {
+module frontBase() {
     difference() {
         union() {
             // left rail guide outer
             translate([-2, 10, -3]) {
                 rotate([90, 0, 0]) {
-                    cylinder(h=60, r=10);
+                    cylinder(h=10, r=10);
                 }
             }
             // right rail guide outer
             translate([85, 10, -3]) {
                 rotate([90, 0, 0]) {
-                    cylinder(h=60, r=10);
+                    cylinder(h=10, r=10);
                 }
             }   
             // base
-            translate([-4, -50, 0]) {
-                cube([90, 60, 7]); 
-            } 
+            cube([90, 10, 5]);  
         }
         // right rail guide inner
         translate([-2, 10, -3]) {
             rotate([90, 0, 0]) {
-                cylinder(h=71, r=7.5);
+                cylinder(h=11, r=7.5);
             }          
         } 
         // right rail guide inner        
         translate([85, 10, -3]) {
             rotate([90, 0, 0]) {
-                cylinder(h=71, r=7.5);
+                cylinder(h=11, r=7.5);
             }          
         } 
         // left rail guide bottom-cut       
-        translate([-12, -73, -20]) {
-            cube([80, 100, 20]);  
+        translate([-12, -13, -20]) {
+            cube([20, 100, 20]);  
         }  
         // right rail guide bottom-cut       
-        translate([75, -73, -20]) {
-            cube([80, 100, 20]);  
+        translate([75, -13, -20]) {
+            cube([20, 100, 20]);  
         }          
     }
 }
 
-module boardMount() {
-    
-    // main body
-    difference() {
-        
-        // base
-        cube([56, 74, 17]);  
-        translate([2, 2, 4]) {
-            cube([51, 70, 15]);  
-        } 
-      
-        // conduit
-        translate([45, 40, 16]) {
-            rotate([0, 90, 0]) {
-                cylinder(h=12, r=10);
-            }
-        } 
-        
-        // side cut
-        translate([3, 69, 6]) {
-            cube([49, 7, 17]);  
-        }       
-    }
- 
-    // tie-bar vertical
-     translate([53, 39, 4]) {
-        cube([3, 3, 13]);  
-    } 
-    // tie-bar horizontal
-    translate([45, 39, 17]) {
-        rotate([0, 90, 0]) {
-            cube([3, 3, 8]);  
-        }
-    }     
-    
-    // power supply standoff - left
-    translate([12, 20, 15]) {
-        cylinder(h=15, r=1.25);
-    }
-    translate([12, 20, 15]) {
-        cylinder(h=10, r=3);
-    }
-    
-    // power supply standoff - left
-    translate([42, 5, 15]) {
-        cylinder(h=15, r=1.25);
-    }   
-    translate([42, 5, 15]) {
-        cylinder(h=10, r=3);
-    }  
-    
-    // power supply base
-     translate([9, 2, 12]) {   
-        cube([36, 21, 3]);  
-     }       
-    
-}
 color("Yellow") {
         translate([55, 25, 30]) {
             rotate([0, -90, 0]) {
@@ -576,9 +517,6 @@ color("Yellow") {
                 //ballHopperBase();
             }
         }
-        translate([-5, -65, -23]) {
-            hopperBase();
-        }        
         
         translate([73, 120, 154]) {
             rotate([0, 0, 180]) {
@@ -594,18 +532,20 @@ color("Yellow") {
         
         
         translate([1, -7, -8]) {
-            //motorBracketBottom();
+            motorBracketBottom();
         }
         translate([48, -40, -15]) {
-            //mountForLimitSwitch();
+            mountForLimitSwitch();
         }        
         translate([-5, -40, -23]) {
-           //rearBase();
+           rearBase();
+        }
+        
+        translate([-5, -65, -23]) {
+            //frontBase();
         }
 
-        translate([0, -240, 0]) {
-            //boardMount();
-        }
+    
 
 }
 
