@@ -110,7 +110,7 @@ class MyActionsApp : DialogflowApp() {
 
             // Particle cloud calls are not blocking.  We need to wait until
             // the load process finishes here.
-            Thread.sleep(3000)
+            Thread.sleep(5000)
 
             add("<speak>" +
                     "Catapult is loaded! Set your target and let " +
