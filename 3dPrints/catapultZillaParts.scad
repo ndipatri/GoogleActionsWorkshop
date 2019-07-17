@@ -38,6 +38,34 @@ module stringSpool() {
         translate([0,0,-31]) {
             cylinder(h=2, r=20);
         }
+        
+         // inner ring left
+        translate([0, 0, -8]) {
+            cylinder(h=2, r=15);
+        }       
+         // inner ring right
+        translate([0, 0, -23]) {
+            cylinder(h=2, r=15);
+        } 
+
+        // shroud left
+        difference() {
+            translate([0, 0, 0]) {
+                cylinder(h=8, r=20);
+            }             
+            translate([0, 0, 0]) {
+                cylinder(h=12, r=18);
+            } 
+        }
+        // shroud right
+        difference() {
+            translate([0, 0, -37]) {
+                cylinder(h=8, r=20);
+            }             
+            translate([0, 0, -38]) {
+                cylinder(h=14, r=18);
+            } 
+        }        
 }
 
 module ballHopperSphere() {
@@ -164,14 +192,8 @@ module ballHopperBaseNonDriveSide() {
 }
 
 module ballHopperBase() {
-    
-    difference() {
-        translate([-42, -30, -122]) {
-            cube([91, 60, 30]);
-        }
-        translate([-37, -27, -119]) {
-            cube([81, 55, 35]);
-        }
+    translate([-40, -27, -122]) {
+        cube([87, 55, 2]);
     }
 }
 
@@ -373,32 +395,35 @@ module mountForLimitSwitch() {
     difference() {
         // main body
         translate([0, 0, -5]) {
-            cube([28, 15, 35]);
+            cube([28, 15, 33]);
         }
         
         // servo cut-out
-        translate([2.5, 0, 5]) {
-            cube([23, 10, 40]);
-        }
-        
-        // wire cut-out
-        translate([0, 0, 5]) {
-            cube([5, 5, 5]);
+        translate([2.5, -1, 5]) {
+            cube([23, 11, 40]);
         }
     } 
     
     // switch posts
-    translate([9,10,25]) {
+    translate([9,10,23]) {
         rotate([90,0,0]) {
             cylinder(h=10, r=1);
         }
     }    
-    translate([19,10,25]) {
+    translate([19,10,23]) {
         rotate([90,0,0]) {
             cylinder(h=10, r=1);
         }
     }
 }
+
+module limitSwitchTopPlate() {
+    // servo cut-out
+    translate([1, 0, 0]) {
+        cube([26, 5, 2]);
+    }    
+}
+
 
 module rearBase() {
     difference() {
@@ -441,62 +466,117 @@ module rearBase() {
         }         
         
         // rubber band cutout       
-        translate([-12, -13, -20]) {
-            cube([53, 44, 50]);  
-        }     
-        
-        // zip-tie via 2      
-        translate([73, 30, -3]) {
-            cylinder(h=10, r=3);
-        }     
-        // zip-tie via 2       
-        translate([73, 20, -3]) {
-            cylinder(h=10, r=3);
-        }     
+        translate([5, -13, -20]) {
+            cube([43, 44, 50]);  
+        }         
     }        
 }
 
-module frontBase() {
+module hopperBase() {
     difference() {
         union() {
             // left rail guide outer
             translate([-2, 10, -3]) {
                 rotate([90, 0, 0]) {
-                    cylinder(h=10, r=10);
+                    cylinder(h=60, r=10);
                 }
             }
             // right rail guide outer
             translate([85, 10, -3]) {
                 rotate([90, 0, 0]) {
-                    cylinder(h=10, r=10);
+                    cylinder(h=60, r=10);
                 }
             }   
             // base
-            cube([90, 10, 5]);  
+            translate([-4, -50, 0]) {
+                cube([90, 60, 7]); 
+            } 
         }
         // right rail guide inner
         translate([-2, 10, -3]) {
             rotate([90, 0, 0]) {
-                cylinder(h=11, r=7.5);
+                cylinder(h=71, r=7.5);
             }          
         } 
         // right rail guide inner        
         translate([85, 10, -3]) {
             rotate([90, 0, 0]) {
-                cylinder(h=11, r=7.5);
+                cylinder(h=71, r=7.5);
             }          
         } 
         // left rail guide bottom-cut       
-        translate([-12, -13, -20]) {
-            cube([20, 100, 20]);  
+        translate([-12, -73, -20]) {
+            cube([80, 100, 20]);  
         }  
         // right rail guide bottom-cut       
-        translate([75, -13, -20]) {
-            cube([20, 100, 20]);  
-        }          
+        translate([75, -73, -20]) {
+            cube([80, 100, 20]);  
+        }  
+
+        // zip-tie via 2      
+        translate([8, -20, -2]) {
+            cylinder(h=14, r=3);
+        }     
+        // zip-tie via 2       
+        translate([8, -30, -2]) {
+            cylinder(h=14, r=3);
+        }  
+        // zip-tie undercut       
+        translate([8, -19, -1]) {
+            rotate([90, 0, 0]) {
+                cylinder(h=13, r=3);
+            }
+        }         
+        
     }
 }
 
+module boardMount() {
+    
+    // main body
+    difference() {
+        
+        // base
+        cube([55, 74, 20]);  
+        translate([2, 2, 2]) {
+            cube([51, 70, 20]);  
+        } 
+      
+        // conduit
+        translate([-9, 30, 16]) {
+            rotate([0, 90, 0]) {
+                cylinder(h=12, r=10);
+            }
+        } 
+        
+        // side cut
+        translate([3, 69, 6]) {
+            cube([49, 7, 17]);  
+        }       
+    }   
+    
+    // power supply standoff - left
+    translate([12, 20, 21]) {
+        cylinder(h=7, r=1.25);
+    }
+    translate([12, 20, 19]) {
+        cylinder(h=5, r=3);
+    }
+    
+    // power supply standoff - right
+    translate([42, 5, 21]) {
+        cylinder(h=7, r=1.25);
+    }   
+    translate([42, 5, 19]) {
+        cylinder(h=5, r=3);
+    }  
+    
+    // power supply base
+     translate([0, 2, 18]) {   
+        cube([55, 21, 2]);  
+     }       
+    
+}
 color("Yellow") {
         translate([55, 25, 30]) {
             rotate([0, -90, 0]) {
@@ -517,6 +597,9 @@ color("Yellow") {
                 //ballHopperBase();
             }
         }
+        translate([-5, -65, -23]) {
+            //hopperBase();
+        }        
         
         translate([73, 120, 154]) {
             rotate([0, 0, 180]) {
@@ -526,26 +609,27 @@ color("Yellow") {
         
         translate([30, 35, 0]) {
             rotate([0, 0, 180]) {
-               // motorBracketTop();  
+               motorBracketTop();  
             } 
         }
         
         
         translate([1, -7, -8]) {
-            motorBracketBottom();
-        }
+            //motorBracketBottom();
+        }     
+        translate([48, -40, 20]) {
+            //limitSwitchTopPlate();
+        }   
         translate([48, -40, -15]) {
-            mountForLimitSwitch();
-        }        
+            //mountForLimitSwitch();
+        }           
         translate([-5, -40, -23]) {
-           rearBase();
-        }
-        
-        translate([-5, -65, -23]) {
-            //frontBase();
+           //rearBase();
         }
 
-    
+        translate([0, -240, 0]) {
+            //boardMount();
+        }
 
 }
 
