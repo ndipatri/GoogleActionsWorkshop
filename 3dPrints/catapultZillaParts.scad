@@ -349,6 +349,110 @@ module motorBracketTop() {
     
 }
 
+module mountForLimitSwitch() {
+    
+    difference() {
+        // main body
+        translate([0, 0, -5]) {
+            cube([28, 15, 33]);
+        }
+        
+        // servo cut-out
+        translate([2.5, -1, 5]) {
+            cube([23, 11, 40]);
+        }
+    } 
+    
+    // switch posts
+    translate([9,10,23]) {
+        rotate([90,0,0]) {
+            cylinder(h=10, r=1);
+        }
+    }    
+    translate([19,10,23]) {
+        rotate([90,0,0]) {
+            cylinder(h=10, r=1);
+        }
+    }
+}
+
+module limitSwitchTopPlate() {
+    // servo cut-out
+    translate([1, 0, 0]) {
+        cube([26, 5, 2]);
+    }    
+}
+
+
+module winchBase() {
+    translate([-5, -40, -23]) {
+        difference() {
+            union() {
+                // left rail guide outer
+                translate([-2, 80, -3]) {
+                    rotate([90, 0, 0]) {
+                        cylinder(h=80, r=10);
+                    }
+                }
+                // right rail guide outer
+                translate([85, 80, -3]) {
+                    rotate([90, 0, 0]) {
+                        cylinder(h=80, r=10);
+                    }
+                }   
+                // base
+                translate([-30, 0, 0]) {
+                    cube([110, 80, 5]);  
+                }
+            }
+            // left rail guide bottom-cut       
+            translate([-12, -13, -20]) {
+                cube([20, 100, 20]);  
+            }          
+            
+            // left rail guide inner
+            translate([-2, 80, -3]) {
+                rotate([90, 0, 0]) {
+                    cylinder(h=81, r=7.5);
+                }          
+            } 
+            // right rail guide inner        
+            translate([85, 80, -3]) {
+                rotate([90, 0, 0]) {
+                    cylinder(h=81, r=7.5);
+                }          
+            }   
+            // right rail guide bottom-cut       
+            translate([72, -13, -20]) {
+                cube([25, 100, 20]);  
+            }         
+            
+            // rubber band cutout       
+            translate([-22, 11, -20]) {
+                cube([25, 20, 50]);  
+            }         
+        }   
+    }
+
+    translate([-29, -7, -8]) {
+        motorBracketBottom();
+    }  
+
+    translate([43, -40, -15]) {
+        mountForLimitSwitch();
+        
+        translate([-3, 0, -3]) {
+            cube([5, 15, 80]);  
+        } 
+        
+        translate([25, 0, -3]) {
+            cube([5, 15, 80]);  
+        }         
+    }  
+    
+    
+}
+
 module motorBracketBottom() {
    
     // base
@@ -388,88 +492,6 @@ module motorBracketBottom() {
             cylinder(h=3, r=4);
         }
     }     
-}
-
-module mountForLimitSwitch() {
-    
-    difference() {
-        // main body
-        translate([0, 0, -5]) {
-            cube([28, 15, 33]);
-        }
-        
-        // servo cut-out
-        translate([2.5, -1, 5]) {
-            cube([23, 11, 40]);
-        }
-    } 
-    
-    // switch posts
-    translate([9,10,23]) {
-        rotate([90,0,0]) {
-            cylinder(h=10, r=1);
-        }
-    }    
-    translate([19,10,23]) {
-        rotate([90,0,0]) {
-            cylinder(h=10, r=1);
-        }
-    }
-}
-
-module limitSwitchTopPlate() {
-    // servo cut-out
-    translate([1, 0, 0]) {
-        cube([26, 5, 2]);
-    }    
-}
-
-
-module rearBase() {
-    difference() {
-        union() {
-            // left rail guide outer
-            translate([-2, 80, -3]) {
-                rotate([90, 0, 0]) {
-                    cylinder(h=80, r=10);
-                }
-            }
-            // right rail guide outer
-            translate([85, 80, -3]) {
-                rotate([90, 0, 0]) {
-                    cylinder(h=80, r=10);
-                }
-            }   
-            // base
-            cube([85, 80, 5]);  
-        }
-        // left rail guide bottom-cut       
-        translate([-12, -13, -20]) {
-            cube([20, 100, 20]);  
-        }          
-        
-        // left rail guide inner
-        translate([-2, 80, -3]) {
-            rotate([90, 0, 0]) {
-                cylinder(h=81, r=7.5);
-            }          
-        } 
-        // right rail guide inner        
-        translate([85, 80, -3]) {
-            rotate([90, 0, 0]) {
-                cylinder(h=81, r=7.5);
-            }          
-        }   
-        // right rail guide bottom-cut       
-        translate([72, -13, -20]) {
-            cube([25, 100, 20]);  
-        }         
-        
-        // rubber band cutout       
-        translate([5, -13, -20]) {
-            cube([43, 44, 50]);  
-        }         
-    }        
 }
 
 module hopperBase() {
@@ -609,27 +631,22 @@ color("Yellow") {
         
         translate([30, 35, 0]) {
             rotate([0, 0, 180]) {
-               motorBracketTop();  
+               //motorBracketTop();  
             } 
-        }
+        } 
         
-        
-        translate([1, -7, -8]) {
-            //motorBracketBottom();
-        }     
-        translate([48, -40, 20]) {
-            //limitSwitchTopPlate();
-        }   
-        translate([48, -40, -15]) {
-            //mountForLimitSwitch();
-        }           
-        translate([-5, -40, -23]) {
-           //rearBase();
-        }
-
         translate([0, -240, 0]) {
             //boardMount();
         }
+        
+        translate([-5, -40, -23]) {
+           winchBase();
+        }   
+        
+        translate([48, -40, 20]) {
+            //limitSwitchTopPlate();
+        }   
+         
 
 }
 
