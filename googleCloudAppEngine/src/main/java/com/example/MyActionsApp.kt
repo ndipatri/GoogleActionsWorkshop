@@ -15,59 +15,16 @@ class MyActionsApp : DialogflowApp() {
     @ForIntent("Default Welcome Intent")
     fun welcome(request: ActionRequest): ActionResponse {
 
-//        (request.userStorage as MutableMap).apply {
-//            clear()
-//        }
+        //(request.userStorage as MutableMap).apply {
+        //    clear()
+        //}
 
         return getResponseBuilder(request).apply {
             LOGGER.info("Welcome intent started.")
 
-            var userName = request.userStorage["userName"]
-
-            if (userName != null) {
-                // Using Speech Synthesis Markup Language (SSML) for effect:
-
-                add("<speak><p><prosody rate=\"x-slow\" pitch=\"-3st\">Arg</prosody>" +
-                        "<break time=\"200ms\"/></p></speak>")
-
-                add("Ahoy $userName! Let me know when you are ready!")
-            } else {
-                add("ignore this text") // this has to be here or there will be
-                // JSON error w/ Dialog Flow
-                add(Permission().apply {
-                    setPermissions(arrayOf(PERMISSION_NAME))
-                    setContext("Beggin yer pardon, sir! " +
-                            "So I don't have to call you sir anymore")
-                })
-            }
+            add("Ahoy! Let me know when you are ready!")
         }.build().also {
             LOGGER.info("Welcome intent ended.")
-        }
-    }
-
-    @ForIntent("Permission Intent")
-    fun permissions(request: ActionRequest): ActionResponse {
-        LOGGER.info("Permission intent started.")
-
-        return getResponseBuilder(request).apply {
-            if (request.isPermissionGranted()) {
-
-                (request.userStorage as MutableMap).apply {
-                    set("userName", "Pirate ${request.user!!.profile.givenName}")
-                }
-
-                var userName = request.userStorage["userName"] as String
-
-                add("Much obliged $userName, Let me know when you " +
-                        "are ready!")
-
-            } else {
-                add("I respect a Pirate's privacy! Let me know when " +
-                        "you are ready!")
-
-            }
-        }.build().also {
-            LOGGER.info("Permissions intent end.")
         }
     }
 
@@ -106,11 +63,15 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            executeParticleCloudFunction("load")
+            // simple catapult
+            executeParticleCloudFunction("actuate", "1e002f000d47373334323233")
+
+            // catapult zilla
+            //executeParticleCloudFunction("load", "330022000b47343432313031")
 
             // Particle cloud calls are not blocking.  We need to wait until
             // the load process finishes here.
-            Thread.sleep(5000)
+            //Thread.sleep(1000)
 
             add("<speak>" +
                     "Catapult is loaded! Set your target and let " +
@@ -128,7 +89,11 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            executeParticleCloudFunction("fire")
+            // simple catapult
+            executeParticleCloudFunction("actuate", "1e002f000d47373334323233")
+
+            // catapult zilla
+            //executeParticleCloudFunction("fire", "330022000b47343432313031")
 
             add("<speak>" +
                     "Great shot! Ready to start again or do you want to say goodbye?" +
@@ -139,7 +104,7 @@ class MyActionsApp : DialogflowApp() {
         }
     }
 
-    private fun executeParticleCloudFunction(functionName: String) {
+    private fun executeParticleCloudFunction(functionName: String, deviceId: String) {
         var client = OkHttpClient()
 
         Logger.getLogger(OkHttpClient::class.java.name).level = Level.FINE
@@ -157,7 +122,7 @@ class MyActionsApp : DialogflowApp() {
                 .header("Authorization",
                         "Bearer ffb8595d62a1c1e929fd962d940ebcb506d269f3")
                 .post(emptyBody)
-                .url("https://api.particle.io/v1/devices/330022000b47343432313031/$functionName")
+                .url("https://api.particle.io/v1/devices/$deviceId/$functionName")
 
                 .build()
 
