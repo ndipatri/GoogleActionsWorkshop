@@ -64,10 +64,10 @@ class MyActionsApp : DialogflowApp() {
         return getResponseBuilder(request).apply {
 
             // simple catapult
-            executeParticleCloudFunction("actuate", "1e002f000d47373334323233")
+            //executeParticleCloudFunction("actuate", "1e002f000d47373334323233")
 
             // catapult zilla
-            //executeParticleCloudFunction("load", "330022000b47343432313031")
+            executeParticleCloudFunction("load", "330022000b47343432313031")
 
             // Particle cloud calls are not blocking.  We need to wait until
             // the load process finishes here.
@@ -90,10 +90,10 @@ class MyActionsApp : DialogflowApp() {
         return getResponseBuilder(request).apply {
 
             // simple catapult
-            executeParticleCloudFunction("actuate", "1e002f000d47373334323233")
+            //executeParticleCloudFunction("actuate", "1e002f000d47373334323233")
 
             // catapult zilla
-            //executeParticleCloudFunction("fire", "330022000b47343432313031")
+            executeParticleCloudFunction("fire", "330022000b47343432313031")
 
             add("<speak>" +
                     "Great shot! Ready to start again or do you want to say goodbye?" +
