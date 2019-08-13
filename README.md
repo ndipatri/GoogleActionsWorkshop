@@ -125,8 +125,7 @@ not to anyone at the conference nor to anyone associated with the conference. An
 do this before attending the workshop.
 
 If all this has scared you away from creating a GCP account, that's ok :-) You can still attend
-the workshop and get through 90% of the content.  You just won't be able to shoot Ping Pong balls
-with your voice :-(
+the workshop and get through all of the content.  You will still be able to shoot your catapult, you just won't be  able to use your voice to do it!
 
 
 
