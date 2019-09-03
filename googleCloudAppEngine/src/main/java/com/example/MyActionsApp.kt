@@ -63,10 +63,6 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            // simple catapult
-            //executeParticleCloudFunction("actuate", "1e002f000d47373334323233")
-
-            // catapult zilla
             executeParticleCloudFunction("load", "330022000b47343432313031")
 
             // Particle cloud calls are not blocking.  We need to wait until
@@ -89,10 +85,6 @@ class MyActionsApp : DialogflowApp() {
 
         return getResponseBuilder(request).apply {
 
-            // simple catapult
-            //executeParticleCloudFunction("actuate", "1e002f000d47373334323233")
-
-            // catapult zilla
             executeParticleCloudFunction("fire", "330022000b47343432313031")
 
             add("<speak>" +
